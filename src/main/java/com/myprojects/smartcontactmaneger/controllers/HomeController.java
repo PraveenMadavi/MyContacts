@@ -1,6 +1,7 @@
 package com.myprojects.smartcontactmaneger.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,9 @@ import jakarta.validation.Valid;
 
 @Controller
 public class HomeController {
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Autowired
     private UserRepo userRepo;
 
@@ -82,11 +86,8 @@ public class HomeController {
 
             System.out.println("APPLICATION : register triggered.");
             System.out.println(user);
-            user.setRole("Not defined yet");
-
-            // System.out.println("User terms acceptance: "+termsAccept);
-            // user.setEnabled(termsAccept);
-
+            user.setRole("ROLE_USER");
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setImageUrl("default.jpg");
 
             userRepo.save(user);
