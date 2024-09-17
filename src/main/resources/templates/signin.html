@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SignIn page</title>
+</head>
+
+<body>
+    <section class="banner d-flex justify-content-center ">
+
+        <div class="container">
+            <div class="col-md-6 offset-md-3">
+                <div class="card transparent-card mt-1">
+                    <div class="card-header">
+                        <h1 class="text-center mb-4">Sign In</h1>
+                    </div>
+
+                    <div class="card-body">
+                        <form action="#" th:action="@{/signin}" method="post">
+                            <!-- Name Field -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control transparent-input" id="name" name="name"
+                                    placeholder="Enter your name" required>
+                            </div>
+
+                            <!-- Password Field -->
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control transparent-input" id="password"
+                                    name="password" placeholder="Enter your password" required>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary mt-2">Sign In</button>
+                                <button type="reset" class="btn btn-primary mt-2 btn-warning">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-header">
+                        <!-- Optional: Links for Forgot Password or Register -->
+                        <div class="text-center mt-3">
+                            <a href="#" class="text-decoration-none">Forgot password ?</a> |
+                            <a href="#" th:href="@{signup}" class="text-decoration-none">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>
