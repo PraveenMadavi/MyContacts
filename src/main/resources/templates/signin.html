@@ -18,13 +18,17 @@
                         <h1 class="text-center mb-4">Sign In</h1>
                     </div>
 
+                    <div th:if="${message}" th:classappend="${message.type}" th:text="${message.content}"
+                        class="alert text-center m-3 transparent-input" role="alert">
+                    </div>
+
                     <div class="card-body">
-                        <form action="#" th:action="@{/signin}" method="post">
+                        <form th:action="@{/login}" method="post">
                             <!-- Name Field -->
                             <div class="mb-3">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control transparent-input" id="name" name="name"
-                                    placeholder="Enter your name" required>
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" class="form-control transparent-input" id="email" name="email"
+                                    placeholder="Enter your email" required>
                             </div>
 
                             <!-- Password Field -->

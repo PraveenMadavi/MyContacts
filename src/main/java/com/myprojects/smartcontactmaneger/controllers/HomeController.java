@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.myprojects.smartcontactmaneger.Repos.UserRepo;
 import com.myprojects.smartcontactmaneger.entities.Message;
 import com.myprojects.smartcontactmaneger.entities.User;
@@ -65,11 +67,8 @@ public class HomeController {
 
     @GetMapping("/signin")
     public String signin(Model model) {
-
         model.addAttribute("title", "Home: Smart Contact Manager");
-
         System.out.println("APPLICATION : SignIn triggered");
-
         return "signin";
     }
 
@@ -108,6 +107,25 @@ public class HomeController {
             return "signup";
         }
     }
+
+    @PostMapping("/login")
+    public String userLogin(@RequestParam("email") String email, @RequestParam("password") String password,
+            Model model) {
+        User loggedUser = userRepo.getUserByEmail(email);
+
+        if (loggedUser != null && passwordEncoder.matches(password, loggedUser.getPassword())) {
+            // User is authenticated, you can save user details in session or perform other
+            // actions
+            System.out.println("APPLICATION : User logged in successfully.");
+            return "redirect:/user/index";
+        } else {
+            // User authentication failed
+            model.addAttribute("message", new Message("Invalid email or password.", "alert-danger"));
+            return "signin";
+        }
+    }
+
+
 
     // @PostMapping("/register")
     // public String registerUser(@RequestParam("name") String name,
