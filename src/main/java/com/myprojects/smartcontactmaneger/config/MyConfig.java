@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -34,8 +35,8 @@ public class MyConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth.requestMatchers("/user/**").hasRole("user")
-                .requestMatchers("/**").permitAll()).formLogin(formLogin -> formLogin.loginPage("/signin").permitAll())
-                .logout(logout -> logout.logoutUrl("/logout").permitAll()).csrf(csrf -> csrf.disable());
+                .requestMatchers("/**").permitAll()).formLogin(login -> login.loginPage("/signin").defaultSuccessUrl("/user/index").permitAll())
+                .logout(logout -> logout.logoutUrl("/logout").permitAll()).csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
     }
