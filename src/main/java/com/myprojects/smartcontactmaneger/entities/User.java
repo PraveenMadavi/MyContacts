@@ -37,7 +37,7 @@ public class User {
     private String password;
 
     private String role;
-    
+
     @AssertTrue(message = "You have to accept terms and conditions for registration.")
     private boolean enabled;
 
@@ -47,7 +47,7 @@ public class User {
     private String about;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
-    private List<Contact> contacts = new ArrayList<Contact>();
+    private List<Contact> contacts = new ArrayList<>();
 
     // ++++++++++++++++++++++++++++++++++++++++
 
@@ -129,8 +129,7 @@ public class User {
     @Override
     public String toString() {
         return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-                + ", enabled=" + enabled + ", imageUrl=" + imageUrl + ", about=" + about + ", contacts=" + contacts
-                + "]";
+                + ", enabled=" + enabled + ", imageUrl=" + imageUrl + ", about=" + about + "]";
     }
 
 }

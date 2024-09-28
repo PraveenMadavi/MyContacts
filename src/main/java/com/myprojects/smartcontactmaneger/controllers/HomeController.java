@@ -1,6 +1,7 @@
 package com.myprojects.smartcontactmaneger.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,11 +9,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.util.WebUtils;
 
 import com.myprojects.smartcontactmaneger.Repos.UserRepo;
 import com.myprojects.smartcontactmaneger.entities.Message;
 import com.myprojects.smartcontactmaneger.entities.User;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -83,7 +88,8 @@ public class HomeController {
             }
 
             System.out.println("APPLICATION : register triggered.");
-            System.out.println(user);
+            System.out.println(user); // for assurance purposes
+
             user.setRole("ROLE_USER");
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setImageUrl("default.jpg");
@@ -107,40 +113,33 @@ public class HomeController {
         }
     }
 
-
-
-     
     @PostMapping("/login")
     public String userLogin(Model model) {
         System.out.println("APPLICATION : User logged in successfully by using login ");
         return "redirect:/user/index";
     }
 
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        // Invalidate the session
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
 
+        // Remove the authentication object
+        SecurityContextHolder.clearContext();
 
-    // @PostMapping("/register")
-    // public String registerUser(@RequestParam("name") String name,
-    // @RequestParam("email") String email,
-    // @RequestParam("password") String password,
-    // @RequestParam("terms") boolean terms,
-    // @RequestParam("about") String about) {
-    // System.out.println("APPLICATION : register triggered.");
-    // // Handle registration logic here
-    // if (terms) {
-    // User user = new User();
-    // user.setName(name);
-    // user.setEmail(email);
-    // user.setPassword(password);
-    // user.setAbout(about);
-    // user.setRole("ROLE_USER");
-    // user.setEnabled(true);
-    // userRepo.save(user);
-    // System.out.println(user.toString());
-    // System.out.println("APPLICATION : User details saves successfully");
-    // return "redirect:/signin";
-    // }
-    // System.out.println("APPLICATION : SignUp triggered due to user not accepted
-    // terms and conditions.");
-    // return "signup";
-    // }
+        // Delete the cookies (Optional: Delete more cookies if needed)
+        var cookie = WebUtils.getCookie(request, "JSESSIONID");
+        if (cookie != null) {
+            cookie.setMaxAge(0);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+        }
+
+        // Redirect to the login page after logout
+        return  "redirect:/signin?logout=true"; 
+    }
+
 }
