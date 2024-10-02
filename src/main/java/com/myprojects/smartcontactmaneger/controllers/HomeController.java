@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.util.WebUtils;
 
 import com.myprojects.smartcontactmaneger.Repos.UserRepo;
 import com.myprojects.smartcontactmaneger.entities.Message;
@@ -113,33 +112,36 @@ public class HomeController {
         }
     }
 
-    @PostMapping("/login")
-    public String userLogin(Model model) {
-        System.out.println("APPLICATION : User logged in successfully by using login ");
-        return "redirect:/user/index";
-    }
 
-    @PostMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        // Invalidate the session
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            session.invalidate();
-        }
 
-        // Remove the authentication object
-        SecurityContextHolder.clearContext();
+    // @PostMapping("/login") // NO NEEDED
+    // public String userLogin(Model model) {
+    //     System.out.println("APPLICATION : User logged in successfully by using login ");
+    //     return "redirect:/user/index";
+    // }
 
-        // Delete the cookies (Optional: Delete more cookies if needed)
-        var cookie = WebUtils.getCookie(request, "JSESSIONID");
-        if (cookie != null) {
-            cookie.setMaxAge(0);
-            cookie.setPath("/");
-            response.addCookie(cookie);
-        }
+    // @PostMapping("/logout") //DONT REMOVE  COMMENTED LOGOUT CONTROLLER METHOD 
+    // public String logout(HttpServletRequest request, HttpServletResponse response) {
+    //     // Invalidate the session
+    //     HttpSession session = request.getSession(false);
+    //     if (session != null) {
+    //         session.invalidate();
+    //     }
+    //     // Remove the authentication object
+    //     SecurityContextHolder.clearContext();
+    //     // Delete the cookies (Optional: Delete more cookies if needed)
+    //     var cookie = WebUtils.getCookie(request, "JSESSIONID");
+    //     if (cookie != null) {
+    //         cookie.setMaxAge(0);
+    //         cookie.setPath("/");
+    //         response.addCookie(cookie);
+    //     }
+    //     System.out.println("Application : User logged out.");
+    //     // Redirect to the login page after logout
+    //     return  "redirect:/signin?logout=true"; 
+    // }
 
-        // Redirect to the login page after logout
-        return  "redirect:/signin?logout=true"; 
-    }
+
+
 
 }
