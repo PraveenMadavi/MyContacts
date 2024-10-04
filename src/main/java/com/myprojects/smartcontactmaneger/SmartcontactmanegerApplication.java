@@ -10,7 +10,7 @@ public class SmartcontactmanegerApplication {
 		SpringApplication.run(SmartcontactmanegerApplication.class, args);
 
 		System.out.println(
-				"Smartcontactmaneger application started .- .--. .--. .-.. .. -.-. .- - .. --- -.    .. ...    .-. ..- -. -. .. -. --.");
+				"Smartcontactmaneger application started ===================================================================>");
 	}
 
 }
