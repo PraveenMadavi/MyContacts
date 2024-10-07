@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{normal/base::layout(~{::section})}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>User Dashbourd</title>
+
+    <title>UserDashbourd page</title>
 </head>
+
 <body>
-    <h1>hello, you are in user Dashbourd page.</h1>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">Logout</button>
-    </form>
-    
+    <section >
+        <h1>This is new user dashbourd.</h1>
+
+        <H2><span th:text="${username}"></span></H2>
+        <H3><span th:text="${userdetails}"></span></H3>
+    </section>
+
+
 </body>
+
 </html>
