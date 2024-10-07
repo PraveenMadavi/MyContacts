@@ -29,16 +29,6 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home(Model model) {
-        // Save a new user
-        // User user = new User();
-        // user.setName("John Doe");
-        // user.setEmail("joj@myprojects.com");
-        // user.setPassword("password123");
-        // user.setRole("ROLE_USER");
-        // user.setEnabled(true);
-        // userRepo.save(user);
-        // System.out.println("User saved successfully");
-        // System.out.println(user + " created successfully");
         model.addAttribute("title", "Home: Smart Contact Manager");
         model.addAttribute("basetitle", "Model base title");
 
