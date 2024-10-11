@@ -38,8 +38,7 @@ public class UserController {
         model.addAttribute("userdetails",userdetails);
 
         user = userRepo.getUserByEmail(userName);
-        // userId = user.getId();
-        model.addAttribute("user", user);
+         model.addAttribute("user", user);
     }
 
     @RequestMapping("/index")
