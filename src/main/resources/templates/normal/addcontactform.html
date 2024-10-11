@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{normal/base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UserDashbourd page</title>
+</head>
+
+<body>
+    <section>
+
+        <div class="container">
+           <div class="col-md-6 offset-md-1 mb-4">
+            <h2 class="mb-3"><b>Add New Contact</b></h2>
+            <div>
+             <form th:action="@{/user/addNewContact}"  method="post" th:object="${contact}" >
+                 <!-- Full Name Field -->
+                 <div class="mb-3">
+                     <label for="fullName" class="form-label">Full Name</label>
+                     <input type="text" class="form-control" id="fullName" th:field="*{name}" required>
+                 </div>
+                 <!-- nickName Field -->
+                 <div class="mb-3">
+                     <label for="nickName" class="form-label">Nick Name</label>
+                     <input type="text" class="form-control" id="nickName" th:field="*{nickName}">
+                 </div>
+                 
+                 <!-- address field -->
+                 <div class="mb-3">
+                     <label for="address" class="form-label">Address</label>
+                     <input type="text" class="form-control" id="address" th:field="*{address}">
+                 </div>
+ 
+                 <!-- mobile number field -->
+                  <div class="mb-3">
+                     <label for="mobileNumber" class="form-label">Mobile Number</label>
+                     <input type="text" class="form-control" id="mobileNumber" th:field="*{mobileNumber}">
+                 </div>
+                 
+                 <!-- email field -->
+                 <div class="mb-3">
+                   <label for="exampleInputEmail1" class="form-label">Email address</label>
+                   <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{email}">
+                   <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                 </div>
+ 
+                 <!-- work field -->
+                  <div class="mb-3">
+                     <label for="work" class="form-label">Work</label>
+                     <input type="text" class="form-control" id="work" th:field="*{work}">
+                 </div>
+                 
+                 <!-- image field -->
+                  <div class="mb-3">
+                     <label for="image" class="form-label">Image</label>
+                     <input type="file" class="form-control-file" id="image" th:field="*{image}">
+                 </div>
+ 
+                 <!-- birthday field -->
+                  <div class="mb-3">
+                     <label for="birthday" class="form-label">Birthday</label>
+                     <input type="date" class="form-control" id="birthday" th:field="*{birthday}">
+                 </div>
+             
+                <!-- description field  -->
+                 <div class="mb-3">
+                     <label for="description" class="form-label">Description</label>
+                     <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+                 </div>
+                 
+                 <!-- submit button -->
+                 <button type="submit" class="btn btn-primary">Save</button>
+               </form>
+            </div>
+           </div>
+        </div>
+    </section>
+
+
+</body>
+
+</html>

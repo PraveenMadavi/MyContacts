@@ -9,11 +9,26 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet"  th:href="@{/css/styles.css}">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  
+    <!-- custon stylesheets -->
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+     <!-- Custom JavaScript -->
+  <script th:src="@{/js/script.js}" defer></script>
+
   <title th:text="${title}">Base page</title>
 </head>
 
-<body class="banner" >
+<body>
   <!-- NAV BAR------------------------------------------------------------------>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
@@ -25,32 +40,45 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" th:href="@{/home}">Home</a>
           </li>
-        
+
           <li class="nav-item">
-            <a class="nav-link" th:href="@{/signin}">UserProfile</a>
+            <a class="nav-link" th:text="${user.name}"></a>
           </li>
 
           <li class="nav-item">
             <form th:action="@{/logout}" method="post" style="display: inline;">
-                <button type="submit" class="btn btn-link nav-link" >
-                    Logout
-                </button>
+              <button type="submit" class="btn btn-link nav-link">
+                Logout
+              </button>
             </form>
-        </li>
-        
+          </li>
+
         </ul>
-       
+
       </div>
     </div>
   </nav>
 
+
+
+  <!-- SIDEBAR------------------------------------------------------------------>
+  <div class="sidebar">
+    <span onclick="toggleSidebar()" class="crossbtn">&times;</span>
+    <a th:href="@{/user/index}" class="item"><i class="fa-duotone fa-solid fa-house"></i> Home</a>
+    <a href="#" class="item"><i class="fa-duotone fa-solid fa-address-card"></i> My Contacts</a>
+    <a th:href="@{/user/addContact}" class="item"><i class="fa-duotone fa-solid fa-plus"></i> Add Contact</a>
+    <a href="#" class="item"><i class="fa-duotone fa-solid fa-gear"></i> Settings</a>
+    <a href="#" class="item"><i class="fa-duotone fa-solid fa-right-from-bracket"></i> Log Out</a>
+  </div>
+
   <!-- Placeholder where content from home.html will be inserted -->
-  <div th:insert="${content}"></div>
+  <div class="content">
+    <span class="bars">
+      <i onclick="toggleSidebar()" class="fa-solid fa-bars"></i>
+    </span>
 
-
-
-
-
+    <div th:insert="${content}"></div>
+  </div>
 
 
   <!-- Optional JavaScript; choose one of the two! -->

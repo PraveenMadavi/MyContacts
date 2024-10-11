@@ -17,11 +17,17 @@ public class Contact {
 
     private String name;
 
-    private String phoneNumber;
+    private String nickName;
+    
+    private String address;
+
+    private String mobileNumber;
 
     private String email;
 
     private String work;
+
+    private String birthday;
 
     private String image;
 
@@ -47,12 +53,28 @@ public class Contact {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
     }
 
     public String getEmail() {
@@ -69,6 +91,14 @@ public class Contact {
 
     public void setWork(String work) {
         this.work = work;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public String getImage() {
@@ -94,6 +124,15 @@ public class Contact {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "Contact [cId=" + cId + ", name=" + name + ", nickName=" + nickName + ", address=" + address
+                + ", mobileNumber=" + mobileNumber + ", email=" + email + ", work=" + work + ", birthday=" + birthday
+                + ", description=" + description + ", user=" + user + "]";
+    }
+
+
 
     
 

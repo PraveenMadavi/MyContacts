@@ -1,7 +1,6 @@
 package com.myprojects.smartcontactmaneger.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +13,6 @@ import com.myprojects.smartcontactmaneger.Repos.UserRepo;
 import com.myprojects.smartcontactmaneger.entities.Message;
 import com.myprojects.smartcontactmaneger.entities.User;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -101,37 +97,6 @@ public class HomeController {
             return "signup";
         }
     }
-
-
-
-    // @PostMapping("/login") // NO NEEDED
-    // public String userLogin(Model model) {
-    //     System.out.println("APPLICATION : User logged in successfully by using login ");
-    //     return "redirect:/user/index";
-    // }
-
-    // @PostMapping("/logout") //DONT REMOVE  COMMENTED LOGOUT CONTROLLER METHOD 
-    // public String logout(HttpServletRequest request, HttpServletResponse response) {
-    //     // Invalidate the session
-    //     HttpSession session = request.getSession(false);
-    //     if (session != null) {
-    //         session.invalidate();
-    //     }
-    //     // Remove the authentication object
-    //     SecurityContextHolder.clearContext();
-    //     // Delete the cookies (Optional: Delete more cookies if needed)
-    //     var cookie = WebUtils.getCookie(request, "JSESSIONID");
-    //     if (cookie != null) {
-    //         cookie.setMaxAge(0);
-    //         cookie.setPath("/");
-    //         response.addCookie(cookie);
-    //     }
-    //     System.out.println("Application : User logged out.");
-    //     // Redirect to the login page after logout
-    //     return  "redirect:/signin?logout=true"; 
-    // }
-
-
 
 
 }
