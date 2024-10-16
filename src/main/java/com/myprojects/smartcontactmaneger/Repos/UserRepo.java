@@ -9,6 +9,6 @@ import com.myprojects.smartcontactmaneger.entities.User;
 public interface UserRepo extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.email = :email")
-    public User getUserByEmail(@Param("email") String email);
+    public User getUserByEmail(@Param("email") String email);  //Processing method
 
 }

@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Retrieve user from the database using the email (username)
         User userByEmail = userRepo.getUserByEmail(username);
-        System.out.println("APPLICATION : USER DETAILS FETCHED : "+ userByEmail);
+        System.out.println("APPLICATION : from UserDetailsServiceImpl : USER DETAILS FETCHED : "+ userByEmail);
 
         // If user is not found, throw UsernameNotFoundException
         if (userByEmail == null) {
