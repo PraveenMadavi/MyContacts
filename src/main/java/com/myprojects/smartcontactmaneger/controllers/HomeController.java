@@ -1,5 +1,7 @@
 package com.myprojects.smartcontactmaneger.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ import jakarta.validation.Valid;
 
 @Controller
 public class HomeController {
+
+    public static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -28,7 +33,8 @@ public class HomeController {
         model.addAttribute("title", "Home: Smart Contact Manager");
         model.addAttribute("basetitle", "Model base title");
 
-        System.out.println("APPLICATION : home triggered");
+        // System.out.println("APPLICATION : home triggered");
+        logger.info("/home triggered.");//just for debugging purposes
 
         return "home";
     }
@@ -38,7 +44,8 @@ public class HomeController {
 
         model.addAttribute("title", "Home: Smart Contact Manager");
 
-        System.out.println("APPLICATION : About triggered");
+        // System.out.println("APPLICATION : About triggered");
+        logger.info("/about triggered.");
 
         return "about";
     }
@@ -49,7 +56,8 @@ public class HomeController {
         model.addAttribute("title", "Home: Smart Contact Manager");
         model.addAttribute("userData", new User());
 
-        System.out.println("APPLICATION : SignUp triggered");
+        // System.out.println("APPLICATION : SignUp triggered");
+        logger.info("/signup triggered");
 
         return "signup";
     }
@@ -57,7 +65,9 @@ public class HomeController {
     @GetMapping("/signin")
     public String signin(Model model) {
         model.addAttribute("title", "Home: Smart Contact Manager");
-        System.out.println("APPLICATION : SignIn triggered");
+        // System.out.println("APPLICATION : SignIn triggered");
+        logger.info("/signin triggered.");
+
         return "signin";
     }
 
@@ -65,15 +75,17 @@ public class HomeController {
     public String registerUser(@Valid @ModelAttribute("userData") User user, BindingResult result, Model model) {
         try {
             if (result.hasErrors()) {
-                System.out.println("Error: " + result.toString());
+                // System.out.println("Error: " + result.toString());
+                logger.error(result.toString());
                 model.addAttribute("userData", user);
                 model.addAttribute("message", new Message("Please fill all details.", "alert-info"));
 
                 return "signup";
             }
 
-            System.out.println("APPLICATION : register triggered.");
-            System.out.println(user); // for assurance purposes
+            // System.out.println("APPLICATION : register triggered.");
+            logger.info("register triggered with user: {} ", user);
+            // System.out.println(user); // for assurance purposes
 
             user.setRole("ROLE_USER");
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -81,12 +93,13 @@ public class HomeController {
 
             userRepo.save(user);
             System.out.println("User Details: " + user);
-            System.out.println("APPLICATION : User details saved successfully");
+            // System.out.println("APPLICATION : User details saved successfully");
+            logger.info("User details saved successfully");
 
             model.addAttribute("message", new Message("You are successfully registered.", "alert-primary"));
             model.addAttribute("userData", user);
 
-            System.out.println("From edited handler.........");
+            // System.out.println("From edited handler.........");
             return "signup";
 
         } catch (Exception e) {
