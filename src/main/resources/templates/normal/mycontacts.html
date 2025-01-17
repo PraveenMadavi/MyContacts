@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{normal/base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartContactManager</title>
+</head>
+
+<body>
+    <section>
+        <h1>My Contacts</h1>
+
+        <h2>Name : <span th:text="${user.name}"></span></h2>
+        <h3><span th:text="${user.about}"></span></h3>
+        
+        <!-- List of Contacts -->
+        <div>
+            <!-- Display message if contact list is empty -->
+            <!-- <div th:if="${#list.isEmpty(contacts)}">
+                <h1 th:text="${message != null ? message : 'No contacts available.'}"></h1>
+            </div> -->
+
+            <!-- Display contacts list if not empty -->
+            <!-- <div>
+                <ul th:if="${!#list.isEmpty(contacts)}">
+                    <li th:each="contact : ${contacts}">
+                        <span th:text="${contact.name}"></span> -
+                        <span th:text="${contact.email}"></span> -
+                        <span th:text="${contact.mobileNumber}"></span>
+                    </li>
+                </ul>
+            </div> -->
+            <h1>List of My contacts</h1>
+            <!-- <p th:text="${contacts}"></p> -->
+
+            <li th:each="contact : ${contacts}">
+                <span th:text="${contact.name}"></span> -
+                <span th:text="${contact.email}"></span> -
+                <span th:text="${contact.mobileNumber}"></span>
+            </li>
+
+    </section>
+
+
+</body>
+
+</html>
